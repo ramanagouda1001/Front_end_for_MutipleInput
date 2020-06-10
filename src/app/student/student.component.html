@@ -1,0 +1,10 @@
+<div class="container">
+    <div>
+        <input type="file" name="uploadImage" class="form-control-file" (change)="onselectednewFile($event)">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary" [disabled]='disableSumbit' (click)="uploadAndProgress()">sumbit</button>
+    <div *ngIf='message' class="text-success">
+        File is uploaded Successfully
+    </div>
+</div>

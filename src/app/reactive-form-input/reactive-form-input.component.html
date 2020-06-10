@@ -1,0 +1,46 @@
+<p (click)="disablePopUp()" style="Padding:150px;color:#dc3545">
+    Click Me to Add Mutiple File</p>
+<div class="backdrop" [ngStyle]="{'display':display3}"></div>
+<div class="modal modal-backdrop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" [ngStyle]="{'display':display3}">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header " style="height:50px;">
+                <div class="job">Select the file</div>
+                <button type="button" class="close" aria-label="Close" (click)="closeModal()"><span
+            aria-hidden="true">&times;</span></button>
+            </div>
+            <form [formGroup]='addFile' (ngSubmit)='addFiles()'>
+                <div class="modal-body">
+                    <div formArrayName='filess'>
+                        <div *ngFor='let control of filess.controls;index as i'>
+                            <div class="form-group">
+                                <label for="filess{{i+1}}">Please select the File {{i+1}}</label>
+                                <input type="file" name="filess{{i+1}}" (change)="onselectednewFile($event)" class='form-control' [formControlName]='i'>
+                                <button class="btn left-margin p-0 cursor" type="button" (click)='removeFiless(i)'>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                                <div class="text-danger" *ngIf='control.invalid && (control.touched || control.dirty)'>
+                                    <div *ngIf='control.errors.required'>
+                                        *This field is mandatory
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf='fileSizeMessage' class="text-danger">
+                            Total Size cannot excced more than 20MB
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div *ngIf="message" class="text-success">
+                        Files are added successfully
+                    </div>
+                    <button [disabled]='addFile.invalid || disableSubmit' class="btn btn-primary" type="submit">Submit</button>
+                    <br><br>
+                    <button class="btn btn-outline-dark float-right" type="button" (click)='addFiless()' [disabled]='disableSubmit'>
+                        Add File</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

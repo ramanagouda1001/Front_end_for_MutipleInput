@@ -1,0 +1,11 @@
+<input type="file" (change)="onFileChange($event)" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+<br><br>
+<table class="table">
+    <tbody>
+        <tr *ngFor="let row of data">
+            <td *ngFor="let val of row">
+                {{val}}
+            </td>
+        </tr>
+    </tbody>
+</table>
